@@ -1,6 +1,5 @@
 import java.util.Arrays;
 import java.util.Iterator;
-import java.util.List;
 import java.util.Locale;
 
 public class WarehouseTest {
@@ -87,7 +86,9 @@ public class WarehouseTest {
     private static void printClients(Warehouse warehouse) {
         System.out.printf("%-4s | %-12s | %-12s | %-12s%n",
             "ID", "Name", "Address", "Balance");
-        for (Client client : collect(warehouse.getClients())) {
+        Iterator<Client> clients = warehouse.getClients();
+        while (clients.hasNext()) {
+            Client client = clients.next();
             System.out.printf(Locale.US, "%-4s | %-12s | %-12s | $%-11.2f%n",
                 client.getId(), client.getName(), client.getAddress(), client.getBalance());
         }
@@ -95,7 +96,9 @@ public class WarehouseTest {
 
     private static void printProducts(Warehouse warehouse) {
         System.out.printf("%-4s | %-12s | %-8s | %-10s%n", "ID", "Name", "Quantity", "Unit price");
-        for (Product product : collect(warehouse.getProducts())) {
+        Iterator<Product> products = warehouse.getProducts();
+        while (products.hasNext()) {
+            Product product = products.next();
             System.out.printf(Locale.US, "%-4s | %-12s | %-8d | $%-9.2f%n",
                     product.getId(), product.getName(), product.getAmountInStock(),
                     product.getSalePrice());
@@ -104,7 +107,9 @@ public class WarehouseTest {
 
     private static void addItems(Warehouse warehouse, String clientId,
             String[] productIds, int quantity) {
-        for (String productId : productIds) {
+        Iterator<String> products = Arrays.asList(productIds).iterator();
+        while (products.hasNext()) {
+            String productId = products.next();
             warehouse.addProductToWishList(clientId, productId, quantity);
         }
     }
@@ -112,7 +117,9 @@ public class WarehouseTest {
     private static void printWishlist(Warehouse warehouse, String clientId) {
         System.out.println(clientId + " wishlist");
         System.out.printf("%-4s | %-12s | %-8s%n", "ID", "Product", "Quantity");
-        for (WishListItem item : warehouse.viewClientWishList(clientId)) {
+        Iterator<WishListItem> items = warehouse.viewClientWishList(clientId).iterator();
+        while (items.hasNext()) {
+            WishListItem item = items.next();
             Product product = item.getProduct();
             System.out.printf("%-4s | %-12s | %-8d%n", product.getId(),
                     product.getName(), item.getQuantity());
@@ -121,7 +128,9 @@ public class WarehouseTest {
 
     private static void printWaitList(Warehouse warehouse, String productId) {
         System.out.println(productId + " waitlist");
-        for (WaitListItem item : warehouse.viewProductWaitList(productId)) {
+        Iterator<WaitListItem> items = warehouse.viewProductWaitList(productId).iterator();
+        while (items.hasNext()) {
+            WaitListItem item = items.next();
             System.out.printf("%s | quantity %d%n", item.getClient().getId(),
                     item.getQuantity());
         }
@@ -129,7 +138,9 @@ public class WarehouseTest {
 
     private static void printInvoices(Warehouse warehouse, String clientId) {
         System.out.println(clientId + " invoices");
-        for (Transaction invoice : warehouse.viewClientInvoices(clientId)) {
+        Iterator<Transaction> invoices = warehouse.viewClientInvoices(clientId).iterator();
+        while (invoices.hasNext()) {
+            Transaction invoice = invoices.next();
             invoice.Invoice();
         }
     }
@@ -148,11 +159,4 @@ public class WarehouseTest {
         System.out.println("\n--- " + title + " ---");
     }
 
-    private static <T> List<T> collect(Iterator<T> iterator) {
-        java.util.ArrayList<T> values = new java.util.ArrayList<>();
-        while (iterator.hasNext()) {
-            values.add(iterator.next());
-        }
-        return values;
-    }
 }

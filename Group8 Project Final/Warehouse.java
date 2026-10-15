@@ -27,9 +27,12 @@ public class Warehouse {
         }
 
         List<Product> addedProducts = new ArrayList<>();
-        for (int i = 0; i < names.size(); i++) {
+        Iterator<String> nameIterator = names.iterator();
+        Iterator<Integer> amountIterator = amounts.iterator();
+        Iterator<Double> priceIterator = prices.iterator();
+        while (nameIterator.hasNext()) {
             addedProducts.add(ProductList.instance().insertProduct(
-                    names.get(i), amounts.get(i), prices.get(i)));
+                nameIterator.next(), amountIterator.next(), priceIterator.next()));
         }
         return addedProducts;
     }
@@ -63,7 +66,9 @@ public class Warehouse {
             return false;
         }
 
-        for (WishListItem item : new ArrayList<>(client.getWishList())) {
+        Iterator<WishListItem> items = new ArrayList<>(client.getWishList()).iterator();
+        while (items.hasNext()) {
+            WishListItem item = items.next();
             Product product = item.getProduct();
             int fulfilled = Math.min(item.getQuantity(), product.getAmountInStock());
             if (fulfilled > 0) {

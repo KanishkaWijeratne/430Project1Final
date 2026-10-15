@@ -29,7 +29,14 @@ public class Product implements Serializable {
   }
 
   public List<WaitListItem> getWaitList() {
-    return waitList;
+    List<WaitListItem> copy = new ArrayList<>();
+    Iterator<WaitListItem> items = waitList.iterator();
+
+    while (items.hasNext()) {
+        WaitListItem item = items.next();
+        copy.add(new WaitListItem( item.getClient(), item.getProduct(), item.getQuantity()));
+      }
+    return copy;
   }
 
   public void removeFromStock(int quantity) {

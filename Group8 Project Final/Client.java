@@ -16,7 +16,9 @@ public class Client implements Serializable {
 
     public List<Transaction> getInvoices(){
         List<Transaction> invoices = new LinkedList<>();
-        for (Transaction transaction : transactions){
+        Iterator<Transaction> iterator = transactions.iterator();
+        while (iterator.hasNext()){
+            Transaction transaction = iterator.next();
             if (transaction.isInvoice()){
                 invoices.add(transaction);
             }
@@ -34,7 +36,9 @@ public class Client implements Serializable {
 
     public double getBalance(){
         double balance = 0.0;
-        for (Transaction transaction : transactions){
+        Iterator<Transaction> iterator = transactions.iterator();
+        while (iterator.hasNext()){
+            Transaction transaction = iterator.next();
             balance += transaction.getAmount();
         }
         return balance;
@@ -60,11 +64,19 @@ public class Client implements Serializable {
 
 
     public List<WishListItem> getWishList(){
-        return wishlist;
+        List<WishListItem> copy = new LinkedList<>();
+        Iterator<WishListItem> iterator = wishlist.iterator();
+        while (iterator.hasNext()){
+            WishListItem item = iterator.next();
+            copy.add(new WishListItem(item.getProduct(),item.getQuantity()));
+        }
+        return copy;
     }
 
     public WishListItem addToWishList(Product product, int quantity){
-        for( WishListItem item: wishlist){
+        Iterator<WishListItem> iterator = wishlist.iterator();
+        while (iterator.hasNext()){
+            WishListItem item = iterator.next();
             if (item.getProduct().getId().equals(product.getId())){
                 item.setQuantity(quantity);
                 return item;
