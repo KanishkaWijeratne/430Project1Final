@@ -309,18 +309,45 @@ public class UserInterface {
 
   public void showInvoices() {
     String clientID = getToken("Enter client id");
-    List<Transaction> result = warehouse.viewClientInvoices(clientID);
-    if (result == null) {
+    Client client = warehouse.getClientByID(clientID);
+
+    if (client == null) {
       System.out.println("No such client");
       return;
     }
+
+    List<Transaction> result = warehouse.viewClientInvoices(clientID);
+
     if (result.isEmpty()) {
       System.out.println("There are no invoices for this client");
+      return;
     }
+
+    System.out.printf(
+        "%nInvoices for %s - %s%nAddress: %s%n",
+        client.getId(),
+        client.getName(),
+        client.getAddress());
+
+    int invoiceCount = 0;
+    double totalInvoiced = 0;
     Iterator<Transaction> invoices = result.iterator();
+
     while (invoices.hasNext()) {
-      invoices.next().Invoice();
+      Transaction invoice = invoices.next();
+
+      System.out.println();
+      invoice.Invoice();
+
+      invoiceCount++;
+      totalInvoiced += invoice.getAmount();
     }
+
+    System.out.printf(
+        Locale.US,
+        "%nInvoice count: %d%nTotal invoiced: $%.2f%n",
+        invoiceCount,
+        totalInvoiced);
   }
 
   public void process() {

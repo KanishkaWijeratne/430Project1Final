@@ -2,6 +2,7 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Locale;
 
 /**
  * Stage 1 Warehouse facade. Public operations follow the Warehouse class box
@@ -153,10 +154,23 @@ public class Warehouse {
     }
 
     private double addInvoice(Client client, Product product, int quantity) {
-        double total = quantity * product.getSalePrice();
-        client.addTransaction(new Transaction(LocalDate.now().toString(),
-                quantity + " x " + product.getName() + " (" + product.getId() + ")",
-                total, true));
+        double unitPrice = product.getSalePrice();
+        double total = quantity * unitPrice;
+
+        String description = String.format(
+                Locale.US,
+                "%d x %s (%s) @ $%.2f each",
+                quantity,
+                product.getName(),
+                product.getId(),
+                unitPrice);
+
+        client.addTransaction(new Transaction(
+                LocalDate.now().toString(),
+                description,
+                total,
+                true));
+
         return total;
     }
 
