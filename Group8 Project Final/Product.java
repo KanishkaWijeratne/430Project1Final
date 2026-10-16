@@ -27,25 +27,41 @@ public class Product implements Serializable {
   public double getSalePrice() {
     return salePrice;
   }
- 
-  //adding waitlsist item to product waitlist
+
   public void addToWaitList(Client client, int quantity) {
-    if (client == null || quantity <= 0) {
-      throw new IllegalArgumentException("Client must not be null and quantity must be positive.");
-    }
-    waitList.add(new WaitListItem(client, this, quantity));
+    addToWaitList(client, quantity, null);
   }
 
+  public void addToWaitList(Client client, int quantity, Order order) {
+    waitList.add(new WaitListItem(client, this, quantity, order));
+  }
 
   public List<WaitListItem> getWaitList() {
     List<WaitListItem> copy = new ArrayList<>();
-    Iterator<WaitListItem> items = waitList.iterator();
+    Iterator<WaitListItem> iterator = waitList.iterator();
 
-    while (items.hasNext()) {
-        WaitListItem item = items.next();
-        copy.add(new WaitListItem( item.getClient(), item.getProduct(), item.getQuantity()));
-      }
+    while (iterator.hasNext()) {
+      WaitListItem item = iterator.next();
+
+      copy.add(new WaitListItem(
+          item.getClient(),
+          this,
+          item.getQuantity(),
+          item.getOrder()));
+    }
+
     return copy;
+  }
+
+  public long getTotalWaitlistedQuantity() {
+    long total = 0;
+    Iterator<WaitListItem> iterator = waitList.iterator();
+
+    while (iterator.hasNext()) {
+      total += iterator.next().getQuantity();
+    }
+
+    return total;
   }
 
   public List<WaitListItem> receiveShipment(int quantity) {
@@ -53,17 +69,34 @@ public class Product implements Serializable {
       throw new IllegalArgumentException("Quantity must be positive.");
     }
 
+    long leftover = Math.max(
+        0L, (long) quantity - getTotalWaitlistedQuantity());
+
+    if ((long) amountInStock + leftover > Integer.MAX_VALUE) {
+      throw new IllegalArgumentException(
+          "Shipment would exceed the supported stock quantity.");
+    }
+
     List<WaitListItem> fulfilledItems = new ArrayList<>();
     int remaining = quantity;
-    Iterator<WaitListItem> waiting = waitList.iterator();
-    while (waiting.hasNext() && remaining > 0) {
-      WaitListItem item = waiting.next();
-      int fulfilled = Math.min(remaining, item.getQuantity());
-      fulfilledItems.add(new WaitListItem(item.getClient(), this, fulfilled));
-      item.reduceQuantity(fulfilled);
-      remaining -= fulfilled;
-      if (item.getQuantity() == 0) {
-        waiting.remove();
+    Iterator<WaitListItem> iterator = waitList.iterator();
+
+    while (iterator.hasNext() && remaining > 0) {
+      WaitListItem waiting = iterator.next();
+
+      int supplied = Math.min(remaining, waiting.getQuantity());
+
+      fulfilledItems.add(new WaitListItem(
+          waiting.getClient(),
+          this,
+          supplied,
+          waiting.getOrder()));
+
+      waiting.reduceQuantity(supplied);
+      remaining -= supplied;
+
+      if (waiting.getQuantity() == 0) {
+        iterator.remove();
       }
     }
 
