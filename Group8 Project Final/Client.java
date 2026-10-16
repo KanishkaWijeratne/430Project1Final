@@ -11,9 +11,7 @@ public class Client implements Serializable {
     private final List<Transaction> transactions = new LinkedList<>();
     private final List<Order> orders = new LinkedList<>(); // added order here
 
-    public List<Transaction> getTransactions(){
-        return transactions;
-    }
+   
     //added getOrders to client
     public List<Order> getOrders(){
         List<Order> copy = new LinkedList<>();
