@@ -32,7 +32,7 @@ public class Warehouse {
         Iterator<Double> priceIterator = prices.iterator();
         while (nameIterator.hasNext()) {
             addedProducts.add(ProductList.instance().insertProduct(
-                nameIterator.next(), amountIterator.next(), priceIterator.next()));
+                    nameIterator.next(), amountIterator.next(), priceIterator.next()));
         }
         return addedProducts;
     }
@@ -60,35 +60,45 @@ public class Warehouse {
         return client.addToWishList(product, quantity);
     }
 
-    //modified placeOrder to add order to client
     public Order placeOrder(String clientID) {
         Client client = getClientByID(clientID);
         if (client == null) {
             return null;
         }
-        
+
         List<WishListItem> orderItems = client.getWishList();
         if (orderItems.isEmpty()) {
             return null;
         }
-        
-        Order order = new Order(clientID, orderItems);
 
-        Iterator<WishListItem> itemIterator = orderItems.iterator();
-        while (itemIterator.hasNext()) {
-            WishListItem item = itemIterator.next();
+        Order order = new Order(clientID, orderItems);
+        Iterator<WishListItem> iterator = orderItems.iterator();
+
+        while (iterator.hasNext()) {
+            WishListItem item = iterator.next();
             Product product = item.getProduct();
-            int fulfilled = Math.min(item.getQuantity(), product.getAmountInStock());
-            if (fulfilled > 0) {
-                product.removeFromStock(fulfilled);
-                order.addCharge(addInvoice(client, product, fulfilled));
+
+            int requested = item.getQuantity();
+            int supplied = Math.min(
+                    requested, product.getAmountInStock());
+
+            if (supplied > 0) {
+                product.removeFromStock(supplied);
+
+                double charge = addInvoice(client, product, supplied);
+                if (charge > 0) {
+                    order.addCharge(charge);
+                }
             }
-            int unfulfilled = item.getQuantity() - fulfilled;
-            if (unfulfilled > 0) {
-                product.addToWaitList(client, unfulfilled);
+
+            int outstanding = requested - supplied;
+            if (outstanding > 0) {
+                product.addToWaitList(client, outstanding, order);
             }
+
             client.removeFromWishList(item);
         }
+
         client.addOrder(order);
         return order;
     }
@@ -110,9 +120,19 @@ public class Warehouse {
         }
 
         List<WaitListItem> fulfilledItems = product.receiveShipment(quantity);
-        for (WaitListItem item : fulfilledItems) {
-            addInvoice(item.getClient(), product, item.getQuantity());
+
+        for (WaitListItem supplied : fulfilledItems) {
+            double charge = addInvoice(
+                    supplied.getClient(),
+                    product,
+                    supplied.getQuantity());
+
+            Order order = supplied.getOrder();
+            if (order != null && charge > 0) {
+                order.addCharge(charge);
+            }
         }
+
         return true;
     }
 
@@ -125,7 +145,8 @@ public class Warehouse {
         Client client = getClientByID(clientID);
         return client == null ? null : client.getInvoices();
     }
-    //added
+
+    // added
     public List<Order> viewClientOrders(String clientID) {
         Client client = getClientByID(clientID);
         return client == null ? null : client.getOrders();

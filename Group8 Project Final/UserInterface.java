@@ -168,11 +168,27 @@ public class UserInterface {
 
   public void showProducts() {
     Iterator<Product> products = warehouse.getProducts();
+
     if (!products.hasNext()) {
       System.out.println("There are no products");
+      return;
     }
+
+    System.out.printf(
+        "%-8s %-24s %12s %12s %14s%n",
+        "ID", "Product", "Unit price", "In stock", "Waitlisted");
+
     while (products.hasNext()) {
-      System.out.println(products.next());
+      Product product = products.next();
+
+      System.out.printf(
+          Locale.US,
+          "%-8s %-24s $%11.2f %12d %14d%n",
+          product.getId(),
+          product.getName(),
+          product.getSalePrice(),
+          product.getAmountInStock(),
+          product.getTotalWaitlistedQuantity());
     }
   }
 
@@ -270,15 +286,24 @@ public class UserInterface {
 
   public void receiveShipment() {
     String productID = getToken("Enter product id");
+
     if (warehouse.getProductByID(productID) == null) {
       System.out.println("No such product");
       return;
     }
+
     int quantity = getQuantity("Enter shipment quantity", 1);
-    if (warehouse.receiveShipment(productID, quantity)) {
-      System.out.println("Shipment received; waitlist items filled first and remaining units added to stock.");
-    } else {
-      System.out.println("Shipment could not be received");
+
+    try {
+      if (warehouse.receiveShipment(productID, quantity)) {
+        System.out.println(
+            "Shipment received; waitlist items filled first "
+                + "and remaining units added to stock.");
+      } else {
+        System.out.println("Shipment could not be received");
+      }
+    } catch (IllegalArgumentException exception) {
+      System.out.println(exception.getMessage());
     }
   }
 
@@ -303,30 +328,42 @@ public class UserInterface {
     help();
     while ((command = getCommand()) != EXIT) {
       switch (command) {
-        case ADD_CLIENT:       addClient();
-                               break;
-        case ADD_PRODUCTS:     addProducts();
-                               break;
-        case SHOW_CLIENTS:     showClients();
-                               break;
-        case SHOW_PRODUCTS:    showProducts();
-                               break;
-        case ADD_TO_WISHLIST:   addToWishList();
-                               break;
-        case SHOW_WISHLIST:     showWishList();
-                               break;
-        case PLACE_ORDER:      placeOrder();
-                               break;
-        case SHOW_WAITLIST:     showWaitList();
-                               break;
-        case RECORD_PAYMENT:   recordPayment();
-                               break;
-        case RECEIVE_SHIPMENT: receiveShipment();
-                               break;
-        case SHOW_INVOICES:     showInvoices();
-                               break;
-        case HELP:             help();
-                               break;
+        case ADD_CLIENT:
+          addClient();
+          break;
+        case ADD_PRODUCTS:
+          addProducts();
+          break;
+        case SHOW_CLIENTS:
+          showClients();
+          break;
+        case SHOW_PRODUCTS:
+          showProducts();
+          break;
+        case ADD_TO_WISHLIST:
+          addToWishList();
+          break;
+        case SHOW_WISHLIST:
+          showWishList();
+          break;
+        case PLACE_ORDER:
+          placeOrder();
+          break;
+        case SHOW_WAITLIST:
+          showWaitList();
+          break;
+        case RECORD_PAYMENT:
+          recordPayment();
+          break;
+        case RECEIVE_SHIPMENT:
+          receiveShipment();
+          break;
+        case SHOW_INVOICES:
+          showInvoices();
+          break;
+        case HELP:
+          help();
+          break;
       }
     }
   }
