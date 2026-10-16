@@ -18,7 +18,9 @@ public class UserInterface {
   private static final int RECORD_PAYMENT = 9;
   private static final int RECEIVE_SHIPMENT = 10;
   private static final int SHOW_INVOICES = 11;
-  private static final int HELP = 12;
+  private static final int SHOW_TRANSACTIONS = 12;
+  private static final int SHOW_OUTSTANDING_CLIENTS = 13;
+  private static final int HELP = 14;
 
   private UserInterface() {
     warehouse = new Warehouse();
@@ -94,28 +96,49 @@ public class UserInterface {
 
   public int getCommand() {
     do {
-      int value = getNumber("Enter command: " + HELP + " for help");
+      int value = getNumber(
+          "Enter command: " + HELP + " for help");
+
       if (value >= EXIT && value <= HELP) {
         return value;
       }
-      System.out.println("Enter a number between " + EXIT + " and " + HELP);
+
+      System.out.println(
+          "Enter a number between " + EXIT + " and " + HELP);
     } while (true);
   }
 
   public void help() {
-    System.out.println("Enter a number between 0 and " + HELP + " as explained below:");
-    System.out.println(EXIT + " to Exit\n");
+    System.out.println(
+        "Enter a number between 0 and " + HELP
+            + " as explained below:");
+
+    System.out.println(EXIT + " to Exit");
     System.out.println(ADD_CLIENT + " to add a client");
     System.out.println(ADD_PRODUCTS + " to add products");
-    System.out.println(SHOW_CLIENTS + " to print all clients and balances");
-    System.out.println(SHOW_PRODUCTS + " to print all products");
-    System.out.println(ADD_TO_WISHLIST + " to add products to a client's wishlist");
-    System.out.println(SHOW_WISHLIST + " to print a client's wishlist");
-    System.out.println(PLACE_ORDER + " to order everything available in a client's wishlist");
-    System.out.println(SHOW_WAITLIST + " to print a product's waitlist");
-    System.out.println(RECORD_PAYMENT + " to record a client's payment");
-    System.out.println(RECEIVE_SHIPMENT + " to receive a product shipment");
-    System.out.println(SHOW_INVOICES + " to print all invoices for a client");
+    System.out.println(
+        SHOW_CLIENTS + " to print all clients and balances");
+    System.out.println(
+        SHOW_PRODUCTS + " to print all products");
+    System.out.println(
+        ADD_TO_WISHLIST + " to add products to a client's wishlist");
+    System.out.println(
+        SHOW_WISHLIST + " to print a client's wishlist");
+    System.out.println(
+        PLACE_ORDER + " to order everything in a client's wishlist");
+    System.out.println(
+        SHOW_WAITLIST + " to print a product's waitlist");
+    System.out.println(
+        RECORD_PAYMENT + " to record a client's payment");
+    System.out.println(
+        RECEIVE_SHIPMENT + " to receive a product shipment");
+    System.out.println(
+        SHOW_INVOICES + " to print all invoices for a client");
+    System.out.println(
+        SHOW_TRANSACTIONS + " to print all transactions for a client");
+    System.out.println(
+        SHOW_OUTSTANDING_CLIENTS
+            + " to print clients with outstanding balances");
     System.out.println(HELP + " for help");
   }
 
@@ -350,6 +373,97 @@ public class UserInterface {
         totalInvoiced);
   }
 
+  public void showTransactions() {
+    String clientID = getToken("Enter client id");
+    Iterator<Transaction> transactions = warehouse.viewClientTransactions(clientID);
+
+    if (transactions == null) {
+      System.out.println("No such client");
+      return;
+    }
+
+    if (!transactions.hasNext()) {
+      System.out.println("There are no transactions for this client");
+      return;
+    }
+
+    Client client = warehouse.getClientByID(clientID);
+
+    System.out.printf(
+        "%nTransactions for %s - %s%n",
+        client.getId(),
+        client.getName());
+
+    int transactionCount = 0;
+
+    while (transactions.hasNext()) {
+      Transaction transaction = transactions.next();
+      String type = transaction.isInvoice() ? "Invoice" : "Payment";
+
+      System.out.printf(
+          Locale.US,
+          "%nTransaction ID: %d%nDate: %s%nType: %s%n"
+              + "Description: %s%nAmount: $%+.2f%n",
+          transaction.getTransactionId(),
+          transaction.getDate(),
+          type,
+          transaction.getDescription(),
+          transaction.getAmount());
+
+      transactionCount++;
+    }
+
+    double balance = client.getBalance();
+    String status = balance > 0 ? "owed"
+        : balance < 0 ? "credit" : "zero";
+
+    System.out.printf(
+        Locale.US,
+        "%nTransaction count: %d%nBalance: $%.2f (%s)%n",
+        transactionCount,
+        Math.abs(balance),
+        status);
+  }
+
+  public void showOutstandingClients() {
+    Iterator<Client> clients = warehouse.getClientsWithOutstandingBalance();
+
+    if (!clients.hasNext()) {
+      System.out.println("No clients have an outstanding balance");
+      return;
+    }
+
+    System.out.printf(
+        "%n%-6s %-20s %-25s %14s%n",
+        "ID", "Name", "Address", "Amount owed");
+
+    int clientCount = 0;
+    double totalOwed = 0;
+
+    while (clients.hasNext()) {
+      Client client = clients.next();
+      double balance = client.getBalance();
+
+      System.out.printf(
+          Locale.US,
+          "%-6s %-20s %-25s $%13.2f%n",
+          client.getId(),
+          client.getName(),
+          client.getAddress(),
+          balance);
+
+      clientCount++;
+      totalOwed += balance;
+    }
+
+    System.out.printf(
+        Locale.US,
+        "%nClients with outstanding balances: %d%n"
+            + "Total amount owed: $%.2f%n",
+        clientCount,
+        totalOwed);
+  }
+
   public void process() {
     int command;
     help();
@@ -387,6 +501,12 @@ public class UserInterface {
           break;
         case SHOW_INVOICES:
           showInvoices();
+          break;
+        case SHOW_TRANSACTIONS:
+          showTransactions();
+          break;
+        case SHOW_OUTSTANDING_CLIENTS:
+          showOutstandingClients();
           break;
         case HELP:
           help();
