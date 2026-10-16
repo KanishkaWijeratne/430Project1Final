@@ -9,9 +9,24 @@ public class Client implements Serializable {
     private final String address;
     private final List<WishListItem> wishlist = new LinkedList<>();
     private final List<Transaction> transactions = new LinkedList<>();
+    private final List<Order> orders = new LinkedList<>(); // added order here
 
     public List<Transaction> getTransactions(){
         return transactions;
+    }
+    //added getOrders to client
+    public List<Order> getOrders(){
+        List<Order> copy = new LinkedList<>();
+        Iterator<Order> iterator = orders.iterator();
+        while (iterator.hasNext()){
+            Order order = iterator.next();
+            copy.add(order);
+        }
+        return copy;
+    }
+    
+    public void addOrder(Order order){
+        orders.add(order);
     }
 
     public List<Transaction> getInvoices(){
@@ -25,6 +40,7 @@ public class Client implements Serializable {
         }
         return invoices;
     }
+
 
     public void addTransaction(Transaction transaction){
         transactions.add(transaction);
