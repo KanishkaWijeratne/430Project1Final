@@ -33,11 +33,11 @@ public class WarehouseTest {
         printWishlist(warehouse, "C3");
 
         section("Place C2 order");
-        require(warehouse.placeOrder("C2"), "C2 order was not accepted");
+        require(warehouse.placeOrder("C2") != null, "C2 order was not accepted");
         printClients(warehouse);
 
         section("Place C3 order");
-        require(warehouse.placeOrder("C3"), "C3 order was not accepted");
+        require(warehouse.placeOrder("C3") != null, "C3 order was not accepted");
         printClients(warehouse);
         printWishlist(warehouse, "C2");
         printWishlist(warehouse, "C3");
@@ -48,7 +48,7 @@ public class WarehouseTest {
             "C3's unfulfilled P1 quantity should be waitlisted");
 
         section("Place C1 order");
-        require(warehouse.placeOrder("C1"), "C1 order was not accepted");
+        require(warehouse.placeOrder("C1") != null, "C1 order was not accepted");
         printClients(warehouse);
         printWishlist(warehouse, "C1");
         printWaitList(warehouse, "P1");

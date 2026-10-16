@@ -60,28 +60,37 @@ public class Warehouse {
         return client.addToWishList(product, quantity);
     }
 
-    public boolean placeOrder(String clientID) {
+    //modified placeOrder to add order to client
+    public Order placeOrder(String clientID) {
         Client client = getClientByID(clientID);
         if (client == null) {
-            return false;
+            return null;
         }
+        
+        List<WishListItem> orderItems = client.getWishList();
+        if (orderItems.isEmpty()) {
+            return null;
+        }
+        
+        Order order = new Order(clientID, orderItems);
 
-        Iterator<WishListItem> items = new ArrayList<>(client.getWishList()).iterator();
-        while (items.hasNext()) {
-            WishListItem item = items.next();
+        Iterator<WishListItem> itemIterator = orderItems.iterator();
+        while (itemIterator.hasNext()) {
+            WishListItem item = itemIterator.next();
             Product product = item.getProduct();
             int fulfilled = Math.min(item.getQuantity(), product.getAmountInStock());
             if (fulfilled > 0) {
                 product.removeFromStock(fulfilled);
-                addInvoice(client, product, fulfilled);
+                order.addCharge(addInvoice(client, product, fulfilled));
             }
             int unfulfilled = item.getQuantity() - fulfilled;
             if (unfulfilled > 0) {
-                product.getWaitList().add(new WaitListItem(client, product, unfulfilled));
+                product.addToWaitList(client, unfulfilled);
             }
             client.removeFromWishList(item);
         }
-        return true;
+        client.addOrder(order);
+        return order;
     }
 
     public boolean recordPayment(String clientID, double amount) {
@@ -125,12 +134,18 @@ public class Warehouse {
         Client client = getClientByID(clientID);
         return client == null ? null : client.getInvoices();
     }
+    //added
+    public List<Order> viewClientOrders(String clientID) {
+        Client client = getClientByID(clientID);
+        return client == null ? null : client.getOrders();
+    }
 
-    private void addInvoice(Client client, Product product, int quantity) {
+    private double addInvoice(Client client, Product product, int quantity) {
         double total = quantity * product.getSalePrice();
         client.addTransaction(new Transaction(LocalDate.now().toString(),
                 quantity + " x " + product.getName() + " (" + product.getId() + ")",
                 total, true));
+        return total;
     }
 
     public Iterator<Client> getClients() {

@@ -27,6 +27,15 @@ public class Product implements Serializable {
   public double getSalePrice() {
     return salePrice;
   }
+ 
+  //adding waitlsist item to product waitlist
+  public void addToWaitList(Client client, int quantity) {
+    if (client == null || quantity <= 0) {
+      throw new IllegalArgumentException("Client must not be null and quantity must be positive.");
+    }
+    waitList.add(new WaitListItem(client, this, quantity));
+  }
+
 
   public List<WaitListItem> getWaitList() {
     List<WaitListItem> copy = new ArrayList<>();
