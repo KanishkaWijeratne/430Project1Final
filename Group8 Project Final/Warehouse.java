@@ -109,19 +109,10 @@ public class Warehouse {
             return false;
         }
 
-        int remaining = quantity;
-        Iterator<WaitListItem> waiting = product.getWaitList().iterator();
-        while (waiting.hasNext() && remaining > 0) {
-            WaitListItem item = waiting.next();
-            int fulfilled = Math.min(remaining, item.getQuantity());
-            addInvoice(item.getClient(), product, fulfilled);
-            item.reduceQuantity(fulfilled);
-            remaining -= fulfilled;
-            if (item.getQuantity() == 0) {
-                waiting.remove();
-            }
+        List<WaitListItem> fulfilledItems = product.receiveShipment(quantity);
+        for (WaitListItem item : fulfilledItems) {
+            addInvoice(item.getClient(), product, item.getQuantity());
         }
-        product.addToStock(remaining);
         return true;
     }
 

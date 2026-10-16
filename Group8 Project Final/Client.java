@@ -47,7 +47,17 @@ public class Client implements Serializable {
     }
 
     public void removeFromWishList(WishListItem item){
-        wishlist.remove(item);
+        if (item == null) {
+            return;
+        }
+        Iterator<WishListItem> iterator = wishlist.iterator();
+        while (iterator.hasNext()) {
+            WishListItem storedItem = iterator.next();
+            if (storedItem.getProduct().getId().equals(item.getProduct().getId())) {
+                iterator.remove();
+                return;
+            }
+        }
     }
 
     public double getBalance(){

@@ -34,10 +34,14 @@ public class WarehouseTest {
 
         section("Place C2 order");
         require(warehouse.placeOrder("C2") != null, "C2 order was not accepted");
+        require(warehouse.viewClientWishList("C2").isEmpty(),
+            "C2 wishlist should be cleared after ordering");
         printClients(warehouse);
 
         section("Place C3 order");
         require(warehouse.placeOrder("C3") != null, "C3 order was not accepted");
+        require(warehouse.viewClientWishList("C3").isEmpty(),
+            "C3 wishlist should be cleared after ordering");
         printClients(warehouse);
         printWishlist(warehouse, "C2");
         printWishlist(warehouse, "C3");
@@ -49,6 +53,8 @@ public class WarehouseTest {
 
         section("Place C1 order");
         require(warehouse.placeOrder("C1") != null, "C1 order was not accepted");
+        require(warehouse.viewClientWishList("C1").isEmpty(),
+            "C1 wishlist should be cleared after ordering");
         printClients(warehouse);
         printWishlist(warehouse, "C1");
         printWaitList(warehouse, "P1");

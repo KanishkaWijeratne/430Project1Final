@@ -48,6 +48,29 @@ public class Product implements Serializable {
     return copy;
   }
 
+  public List<WaitListItem> receiveShipment(int quantity) {
+    if (quantity <= 0) {
+      throw new IllegalArgumentException("Quantity must be positive.");
+    }
+
+    List<WaitListItem> fulfilledItems = new ArrayList<>();
+    int remaining = quantity;
+    Iterator<WaitListItem> waiting = waitList.iterator();
+    while (waiting.hasNext() && remaining > 0) {
+      WaitListItem item = waiting.next();
+      int fulfilled = Math.min(remaining, item.getQuantity());
+      fulfilledItems.add(new WaitListItem(item.getClient(), this, fulfilled));
+      item.reduceQuantity(fulfilled);
+      remaining -= fulfilled;
+      if (item.getQuantity() == 0) {
+        waiting.remove();
+      }
+    }
+
+    addToStock(remaining);
+    return fulfilledItems;
+  }
+
   public void removeFromStock(int quantity) {
     if (quantity < 0 || quantity > amountInStock) {
       throw new IllegalArgumentException("Quantity exceeds available stock.");
