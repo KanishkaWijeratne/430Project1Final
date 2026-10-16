@@ -59,7 +59,7 @@ public class WarehouseTest {
         printWishlist(warehouse, "C1");
         printWaitList(warehouse, "P1");
 
-        section("Record C1 and C2 payments");
+        section("Record C1 and C2 payments of $100 each");
         require(warehouse.recordPayment("C1", 100), "C1 payment failed");
         require(warehouse.recordPayment("C2", 100), "C2 payment failed");
         printClients(warehouse);
