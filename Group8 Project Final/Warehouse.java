@@ -181,4 +181,13 @@ public class Warehouse {
     public Iterator<Product> getProducts() {
         return ProductList.instance().getProducts();
     }
+
+    public Iterator<Transaction> viewClientTransactions(String clientID) {
+        Client client = getClientByID(clientID);
+        return client == null ? null : client.getTransactions();
+    }
+
+    public Iterator<Client> getClientsWithOutstandingBalance() {
+        return ClientList.instance().getClientsWithOutstandingBalance();
+    }
 }
