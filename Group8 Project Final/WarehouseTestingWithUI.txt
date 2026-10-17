@@ -1,0 +1,412 @@
+Script started on 2026-10-17 10:33:03-05:00 [TERM="xterm-256color" TTY="/dev/pts/0" COLUMNS="97" LINES="56"]
+[?u[>0q]11;?\[?1049hP+q696e646e\P+q71756572792d6f732d6e616d65\[?1049l[0c[m[1m[32m           [30m.[32m-------------------------:[m                    [m[1m[32muser[m@[1m[32mcachyos-x8664[m
+[1m[32m          .[36m+=[32m========================.[m                    ------------------
+[1m[32m         :[36m++[32m===[36m++===[32m===============-       :[36m++[32m-[m           [m[1m[36mOS[m: [mCachyOS x86_64
+[1m[32m        :[36m*++[32m====[36m+++++==[32m===========-        .==:[m           [m[1m[36mHost[m: [m21B5003XUS (ThinkPad L13 Yoga Gen 3)
+[1m[32m       -[36m*+++[32m=====[36m+***++=[32m=========:[m                        [m[1m[36mKernel[m: [mLinux 7.2.9-2-cachyos
+[1m[32m      =[36m*++++=[32m=======------------:[m                         [m[1m[36mUptime[m: [m1 day, 2 hours, 40 mins
+[1m[32m     =[36m*+++++=[32m====-                     [30m...[32m[m                [m[1m[36mPackages[m: [m1538 (pacman)
+[1m[32m   .[36m+*+++++[32m=-===:                    .[36m=+++=[32m:[m              [m[1m[36mShell[m: [mfish 4.9.3
+[1m[32m  :[36m++++[32m=====-==:                     -***[36m**[32m+[m              [m[1m[36mDisplay (AUO6693)[m: [m1920x1200 @ 1.5x in 13", 60 Hz [Built-in]
+[1m[32m :[36m++=[32m=======-=.                      .=+**+[30m.[32m[m              [m[1m[36mDisplay (HP E223)[m: [m1080x1920 in 22", 60 Hz [External]
+[1m[32m.[36m+[32m==========-.                          [30m.[32m[m                 [m[1m[36mDisplay (EI322QUR)[m: [m2560x1440 in 31", 120 Hz [External] *
+[1m[32m :[36m+++++++[32m====-                                [30m.[32m--==-[30m.[32m[m     [m[1m[36mDesktop Environment[m: [mKDE Plasma 6.7.5
+[1m[32m  :[36m++[32m==========.                             [30m:[36m+++++++[32m[30m:[m    [m[1m[36mWindow Manager[m: [mKWin (Wayland)
+[1m[30m   [32m.-===========.                            =*****+*+[m    [m[1m[36mWM Theme[m: [mBreeze
+[1m[32m    [32m.-===========:                           .+*****+:[m    [m[1m[36mTheme[m: [mBreeze (Dark) [Qt], Breeze-Dark [GTK2], Breeze [GTK3]
+[1m[32m      [32m-=======[36m++++[32m:::::::::::::::::::::::::-:  [30m.[32m---:[m      [m[1m[36mIcons[m: [mbreeze-dark [Qt], breeze-dark [GTK2/3/4]
+[1m[32m       :======[36m++++[32m====[36m+++******************=.[m             [m[1m[36mFont[m: [mNoto Sans (10pt) [Qt], Noto Sans (10pt) [GTK2/3/4]
+[1m[36m        [32m:=====[36m+++[32m==========[36m++++++++++++++*-[m               [m[1m[36mCursor[m: [mcapitaine (24px)
+[1m[36m         [32m.====[36m++[32m==============[36m++++++++++*-[m                [m[1m[36mTerminal[m: [mcode 1.138.0
+[1m[36m          [32m.===[36m+[32m==================[36m+++++++:[m                 [m[1m[36mCPU[m: [m12th Gen Intel(R) Core(TM) i7-1255U (4+8) @ 4.70 GHz
+[1m[36m           [32m.-=======================[36m+++:[m                  [m[1m[36mGPU[m: [mIntel Iris Xe Graphics @ 1.25 GHz [Integrated]
+[1m[36m             [30m..........................[m                   [m[1m[36mMemory[m: [m6.57 GiB / 15.31 GiB ([32m43%[m)
+                                                          [m[1m[36mSwap[m: [m1.35 GiB / 15.31 GiB ([32m9%[m)
+                                                          [m[1m[36mDisk (/)[m: [m147.02 GiB / 472.94 GiB ([32m31%[m) - btrfs
+                                                          [m[1m[36mLocal IP (wlan0)[m: [m192.168.1.141/24
+                                                          [m[1m[36mBattery (5B10W51849)[m: [m[32m68%[m [AC Connected, Charging]
+                                                          [m[1m[36mLocale[m: [men_US.UTF-8
+                                                          
+                                                          [m[40m   [41m   [42m   [43m   [44m   [45m   [46m   [47m   [m
+                                                          [100m   [101m   [102m   [103m   [104m   [105m   [106m   [107m   [m
+[m]7;file://cachyos-x8664/home/user/CSCI%20430%20v2/Project1Final/430Project1Final/Group8%20Project%20Final[K]0;~/CSCI 430 v2/Project1Final/430Project1Final/Group8 Project Final - fish\[m]11;?\[6n[0c[?2004h[?2031h[=5u[K]133;A;click_events=1\[34m~/CSCI 430 v2/Project1Final/430Project1Final/Group8 Project Final [90mmain[90m*
+[35m❯[m ]133;B\[K[2Cj[3C[91mj[39m[3C[90mava UserInterface[39m[3C[91ma[90mva UserInterface[39m[4C[91mv[90ma UserInterface[39m[5C[91ma[90m UserInterface[39m[6C[4Djava[90m UserInterface[39m[6Cc[K[7C[90m *.java[39m[7C[5Djavac *.java[14C[14C[12Djavac [96m*[36m.java[39m[14C[?2004l[?2031l[=0u[14C
+[m]133;C;cmdline_url=javac%20%2A.java\]0;~/CSCI 430 v2/Project1Final/430Project1Final/Group8 Project Final: javac *.java - javac\[m]133;D;0\[?25h[2m⏎[m                                                                                                ⏎ [K[K
+]7;file://cachyos-x8664/home/user/CSCI%20430%20v2/Project1Final/430Project1Final/Group8%20Project%20Final]0;~/CSCI 430 v2/Project1Final/430Project1Final/Group8 Project Final - fish\[m]11;?\[6n[0c[?2004h[?2031h[=5u[K]133;A;click_events=1\[34m~/CSCI 430 v2/Project1Final/430Project1Final/Group8 Project Final [90mmain[90m*
+[35m❯[m ]133;B\[K[2Cj[3C[90mavac *.java[39m[3C[91mj[90mavac *.java[39m[3C[91ma[90mvac *.java[39m[4C[91mv[90mac *.java[39m[5C[91ma[90mc *.java[39m[6C[4Djava[90mc *.java[39m[6C [K[7C[90mUserInterface[39m[7C [90mUserInterface[39m[7C[5Djava UserInterface[20C[20C[18Djava [36;4mUserInterface[39;24m[20C[?2004l[?2031l[=0u[20C
+[m]133;C;cmdline_url=java%20UserInterface\]0;~/CSCI 430 v2/Project1Final/430Project1Final/Group8 Project Final: java UserInterface - java\[mEnter a number between 0 and 14 as explained below:
+0 to Exit
+1 to add a client
+2 to add products
+3 to print all clients and balances
+4 to print all products
+5 to add products to a client's wishlist
+6 to print a client's wishlist
+7 to order everything in a client's wishlist
+8 to print a product's waitlist
+9 to record a client's payment
+10 to receive a product shipment
+11 to print all invoices for a client
+12 to print all transactions for a client
+13 to print clients with outstanding balances
+14 for help
+Enter command: 14 for help
+1
+Enter client name
+Client1
+Enter address
+Address1
+Client name Client1 address Address1 id C1
+Enter command: 14 for help
+2 1
+Enter client name
+Client2
+Enter address
+Address2
+Client name Client2 address Address2 id C2
+Enter command: 14 for help
+1
+Enter client name
+Client3
+Enter address
+Address3
+Client name Client3 address Address3 id C3
+Enter command: 14 for help
+1
+Enter client name
+Client4
+Enter address
+Address4
+Client name Client4 address Address4 id C4
+Enter command: 14 for help
+1
+Enter client name
+Client5
+Enter address
+Address5
+Client name Client5 address Address5 id C5
+Enter command: 14 for help
+3
+Client name Client1 address Address1 id C1 Balance: $0.00 (zero)
+Client name Client2 address Address2 id C2 Balance: $0.00 (zero)
+Client name Client3 address Address3 id C3 Balance: $0.00 (zero)
+Client name Client4 address Address4 id C4 Balance: $0.00 (zero)
+Client name Client5 address Address5 id C5 Balance: $0.00 (zero)
+Enter command: 14 for help
+2
+Enter product name
+Product1
+Enter initial quantity in stock
+10
+Enter unit sale price
+1
+Product name Product1 amount in stock 10 sale price 1.0 id P1
+Add more products? (Y|y)[es] or anything else for no
+y
+Enter product name
+Product2
+Enter initial quantity in stock
+20
+Enter unit sale price
+2
+Product name Product2 amount in stock 20 sale price 2.0 id P2
+Add more products? (Y|y)[es] or anything else for no
+y
+Enter product name
+Product3
+Enter initial quantity in stock
+30
+Enter unit sale price
+3
+Product name Product3 amount in stock 30 sale price 3.0 id P3
+Add more products? (Y|y)[es] or anything else for no
+y
+Enter product name
+Product4
+Enter initial quantity in stock
+40
+Enter unit sale price
+4
+Product name Product4 amount in stock 40 sale price 4.0 id P4
+Add more products? (Y|y)[es] or anything else for no
+Y
+Enter product name
+Product5
+Enter initial quantity in stock
+50
+Enter unit sale price
+5
+Product name Product5 amount in stock 50 sale price 5.0 id P5
+Add more products? (Y|y)[es] or anything else for no
+n
+Enter command: 14 for help
+4
+ID       Product                    Unit price     In stock     Waitlisted
+P1       Product1                 $       1.00           10              0
+P2       Product2                 $       2.00           20              0
+P3       Product3                 $       3.00           30              0
+P4       Product4                 $       4.00           40              0
+P5       Product5                 $       5.00           50              0
+Enter command: 14 for help
+5
+Enter client id
+C1
+Enter product id
+P1
+Enter desired quantity (replaces any existing wishlist quantity)
+5
+Wishlist updated: P1 quantity 5
+Add more products to this wishlist? (Y|y)[es] or anything else for no
+y
+Enter product id
+P3
+Enter desired quantity (replaces any existing wishlist quantity)
+5
+Wishlist updated: P3 quantity 5
+Add more products to this wishlist? (Y|y)[es] or anything else for no
+y
+Enter product id
+P5
+Enter desired quantity (replaces any existing wishlist quantity)
+5
+Wishlist updated: P5 quantity 5
+Add more products to this wishlist? (Y|y)[es] or anything else for no
+no
+Enter command: 14 for help
+6
+Enter client id
+C1
+P1 Product1 quantity 5
+P3 Product3 quantity 5
+P5 Product5 quantity 5
+Enter command: 14 for help
+5
+Enter client id
+C2
+Enter product id
+P1
+Enter desired quantity (replaces any existing wishlist quantity)
+7
+Wishlist updated: P1 quantity 7
+Add more products to this wishlist? (Y|y)[es] or anything else for no
+y
+Enter product id
+P2
+Enter desired quantity (replaces any existing wishlist quantity)
+7
+Wishlist updated: P2 quantity 7
+Add more products to this wishlist? (Y|y)[es] or anything else for no
+y
+Enter product id
+P4
+Enter desired quantity (replaces any existing wishlist quantity)
+7
+Wishlist updated: P4 quantity 7
+Add more products to this wishlist? (Y|y)[es] or anything else for no
+n
+Enter command: 14 for help
+6
+Enter client id
+C2
+P1 Product1 quantity 7
+P2 Product2 quantity 7
+P4 Product4 quantity 7
+Enter command: 14 for help
+5
+Enter client id
+C3
+Enter product id
+P1
+Enter desired quantity (replaces any existing wishlist quantity)
+6
+Wishlist updated: P1 quantity 6
+Add more products to this wishlist? (Y|y)[es] or anything else for no
+y
+Enter product id
+P2
+Enter desired quantity (replaces any existing wishlist quantity)
+6
+Wishlist updated: P2 quantity 6
+Add more products to this wishlist? (Y|y)[es] or anything else for no
+Y
+Enter product id
+P5
+Enter desired quantity (replaces any existing wishlist quantity)
+6
+Wishlist updated: P5 quantity 6
+Add more products to this wishlist? (Y|y)[es] or anything else for no
+n
+Enter command: 14 for help
+g
+Please input a whole number
+Enter command: 14 for help
+6
+Enter client id
+C3
+P1 Product1 quantity 6
+P2 Product2 quantity 6
+P5 Product5 quantity 6
+Enter command: 14 for help
+7
+Enter client id
+C2
+Order 2026-10-17-0001 placed for C2 on 2026-10-17. Amount charged: $49.00
+Any unfulfilled quantities are on the products' waitlists.
+Enter command: 14 for help
+3
+Client name Client1 address Address1 id C1 Balance: $0.00 (zero)
+Client name Client2 address Address2 id C2 Balance: $49.00 (debit)
+Client name Client3 address Address3 id C3 Balance: $0.00 (zero)
+Client name Client4 address Address4 id C4 Balance: $0.00 (zero)
+Client name Client5 address Address5 id C5 Balance: $0.00 (zero)
+Enter command: 14 for help
+7
+Enter client id
+C3
+Order 2026-10-17-0002 placed for C3 on 2026-10-17. Amount charged: $45.00
+Any unfulfilled quantities are on the products' waitlists.
+Enter command: 14 for help
+3
+Client name Client1 address Address1 id C1 Balance: $0.00 (zero)
+Client name Client2 address Address2 id C2 Balance: $49.00 (debit)
+Client name Client3 address Address3 id C3 Balance: $45.00 (debit)
+Client name Client4 address Address4 id C4 Balance: $0.00 (zero)
+Client name Client5 address Address5 id C5 Balance: $0.00 (zero)
+Enter command: 14 for help
+6
+Enter client id
+C2
+Wishlist is empty
+Enter command: 14 for help
+6
+Enter client id
+C3
+Wishlist is empty
+Enter command: 14 for help
+8
+Enter product id
+P1
+Client C3 Client3 product P1 quantity 3
+Enter command: 14 for help
+8
+Enter product id
+P2
+Waitlist is empty
+Enter command: 14 for help
+7
+Enter client id
+C1
+Order 2026-10-17-0003 placed for C1 on 2026-10-17. Amount charged: $40.00
+Any unfulfilled quantities are on the products' waitlists.
+Enter command: 14 for help
+3
+Client name Client1 address Address1 id C1 Balance: $40.00 (debit)
+Client name Client2 address Address2 id C2 Balance: $49.00 (debit)
+Client name Client3 address Address3 id C3 Balance: $45.00 (debit)
+Client name Client4 address Address4 id C4 Balance: $0.00 (zero)
+Client name Client5 address Address5 id C5 Balance: $0.00 (zero)
+Enter command: 14 for help
+6
+Enter client id
+C1
+Wishlist is empty
+Enter command: 14 for help
+9
+Enter client id
+C1
+Enter payment amount
+100
+Payment recorded
+Enter command: 14 for help
+9
+Enter client id
+C2
+Enter payment amount
+100
+Payment recorded
+Enter command: 14 for help
+3
+Client name Client1 address Address1 id C1 Balance: $60.00 (credit)
+Client name Client2 address Address2 id C2 Balance: $51.00 (credit)
+Client name Client3 address Address3 id C3 Balance: $45.00 (debit)
+Client name Client4 address Address4 id C4 Balance: $0.00 (zero)
+Client name Client5 address Address5 id C5 Balance: $0.00 (zero)
+Enter command: 14 for help
+10
+Enter product id
+P1
+Enter shipment quantity
+100
+Shipment received; waitlist items filled first and remaining units added to stock.
+Enter command: 14 for help
+4
+ID       Product                    Unit price     In stock     Waitlisted
+P1       Product1                 $       1.00           92              0
+P2       Product2                 $       2.00            7              0
+P3       Product3                 $       3.00           25              0
+P4       Product4                 $       4.00           33              0
+P5       Product5                 $       5.00           39              0
+Enter command: 14 for help
+3
+Client name Client1 address Address1 id C1 Balance: $55.00 (credit)
+Client name Client2 address Address2 id C2 Balance: $51.00 (credit)
+Client name Client3 address Address3 id C3 Balance: $48.00 (debit)
+Client name Client4 address Address4 id C4 Balance: $0.00 (zero)
+Client name Client5 address Address5 id C5 Balance: $0.00 (zero)
+Enter command: 14 for help
+11
+Enter client id
+C1
+
+Invoices for C1 - Client1
+Address: Address1
+
+Invoice ID: 720557021877605227
+Date: 2026-10-17
+Description: 5 x Product3 (P3) @ $3.00 each
+Invoice total: $15.00
+
+Invoice ID: 5210665843852500450
+Date: 2026-10-17
+Description: 5 x Product5 (P5) @ $5.00 each
+Invoice total: $25.00
+
+Invoice ID: 115140201546356612
+Date: 2026-10-17
+Description: 5 x Product1 (P1) @ $1.00 each
+Invoice total: $5.00
+
+Invoice count: 3
+Total invoiced: $45.00
+Enter command: 14 for help
+11
+Enter client id
+C2
+
+Invoices for C2 - Client2
+Address: Address2
+
+Invoice ID: 3385002958710355866
+Date: 2026-10-17
+Description: 7 x Product1 (P1) @ $1.00 each
+Invoice total: $7.00
+
+Invoice ID: 1842002672354771282
+Date: 2026-10-17
+Description: 7 x Product2 (P2) @ $2.00 each
+Invoice total: $14.00
+
+Invoice ID: 1608462080809818456
+Date: 2026-10-17
+Description: 7 x Product4 (P4) @ $4.00 each
+Invoice total: $28.00
+
+Invoice count: 3
+Total invoiced: $49.00
+Enter command: 14 for help
+0
+]133;D;0\[?25h[2m⏎[m                                                                                                ⏎ [K[K
+]7;file://cachyos-x8664/home/user/CSCI%20430%20v2/Project1Final/430Project1Final/Group8%20Project%20Final]0;~/CSCI 430 v2/Project1Final/430Project1Final/Group8 Project Final - fish\[m]11;?\[6n[0c[?2004h[?2031h[=5u[K]133;A;click_events=1\[34m~/CSCI 430 v2/Project1Final/430Project1Final/Group8 Project Final [90mmain[90m* [33m8m 32s
+[35m❯[m ]133;B\[K[2Ce[3C[90mxit[39m[3C[91me[90mxit[39m[3C[91mx[90mit[39m[4C[91mi[90mt[39m[5C[91mt[39m[6C[6C[4Dexit[6C[?2004l[?2031l[=0u[6C
+[m]133;C;cmdline_url=exit\]0;~/CSCI 430 v2/Project1Final/430Project1Final/Group8 Project Final: exit - exit\[m]133;D;0\[?25h[m
+Script done on 2026-10-17 10:41:48-05:00 [COMMAND_EXIT_CODE="0"]
