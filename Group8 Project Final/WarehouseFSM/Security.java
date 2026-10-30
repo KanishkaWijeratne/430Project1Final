@@ -1,6 +1,6 @@
 public class Security {
   private final String MANAGER_CREDENTIALS = "manager";
-  private final String CLERK_CREDENTIALS = "clerk";
+  private final String CLERK_CREDENTIALS = "salesclerk";
 
   private final Warehouse warehouse;
 
