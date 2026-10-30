@@ -14,6 +14,7 @@ public class WarehouseContext {
 
     private static WarehouseContext context;
     private final Warehouse warehouse = new Warehouse();
+    private final Security security = new Security(warehouse);
     private final UserInterface userInterface = new UserInterface(warehouse);
     private final WarehouseState[] states;
     private final int[][] nextState;
@@ -117,9 +118,9 @@ public class WarehouseContext {
         currentState = states[currentStateIndex];
     }
 
-    public int loginAsClient(String id) {
-        if (id == null || warehouse.getClientByID(id) == null) {
-            System.out.println("No such client");
+    public int loginAsClient(String id, String password) {
+        if (!security.verifyLogin(Role.CLIENT, id, password)) {
+            System.out.println("No such client, or invalid credentials");
             return STAY;
         }
         clientID = id;
@@ -128,19 +129,38 @@ public class WarehouseContext {
 
     public int becomeClient(String id) {
         if (id == null || warehouse.getClientByID(id) == null) {
-            System.out.println("No such client");
+            System.out.println("No such client, or invalid credentials");
             return STAY;
         }
         clientID = id;
         return GO_CLIENT;
     }
 
-    public int becomeClerk() {
+    public int loginAsClerk(String username, String password) {
+        if (!security.verifyLogin(Role.CLERK, username, password)) {
+            System.out.println("No such clerk, or invalid credentials");
+            return STAY;
+        }
+        return GO_CLERK;
+    }
+    public int becomeClerk(String managerPassword) {
+        if (!security.verifyManagerPassword(managerPassword)) {
+            System.out.println("Invalid manager credentials");
+            return STAY;
+        }
         return GO_CLERK;
     }
 
-    public int becomeManager() {
+    public int loginAsManager(String username, String password) {
+        if (!security.verifyLogin(Role.MANAGER, username, password)) {
+            System.out.println("No such manager, or invalid credentials");
+            return STAY;
+        }
         return GO_MANAGER;
+    }
+
+    public boolean verifyManagerPassword(String password) {
+        return security.verifyManagerPassword(password);
     }
 
     public int logout() {
