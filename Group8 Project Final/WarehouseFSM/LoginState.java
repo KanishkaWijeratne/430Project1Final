@@ -19,13 +19,16 @@ public class LoginState extends WarehouseState {
             return context.stay();
         }
 
+        String username = ui.getToken(
+                command == 1 ? "Enter client ID" : "Enter username");
+        String password = ui.getToken("Enter password");
+
         if (command == 1) {
-            String clientID = ui.getToken("Enter client id");
-            return context.loginAsClient(clientID);
+            return context.loginAsClient(username, password);
         }
         if (command == 2) {
-            return context.becomeClerk();
+            return context.loginAsClerk(username, password);
         }
-        return context.becomeManager();
+        return context.loginAsManager(username, password);
     }
 }

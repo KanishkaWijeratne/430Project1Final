@@ -23,7 +23,8 @@ public class ManagerMenuState extends WarehouseState {
                 ui.receiveShipment();
                 break;
             case 4:
-                return context.becomeClerk();
+                return context.becomeClerk(
+                        ui.getToken("Confirm manager password"));
             case 5:
                 return context.logout();
             default:
