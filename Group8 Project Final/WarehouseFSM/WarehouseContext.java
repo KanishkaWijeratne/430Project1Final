@@ -34,10 +34,10 @@ public class WarehouseContext {
                 new ManagerMenuState(this)
         };
         nextState = new int[][] {
-                {LOGIN, CLIENT, CLERK, MANAGER, TERMINATED, TERMINATED},
-                {CLIENT, TERMINATED, TERMINATED, TERMINATED, RETURN_TO_ORIGIN, TERMINATED},
-                {CLERK, CLIENT, TERMINATED, TERMINATED, RETURN_TO_ORIGIN, TERMINATED},
-                {MANAGER, TERMINATED, CLERK, TERMINATED, LOGIN, TERMINATED}
+                { LOGIN, CLIENT, CLERK, MANAGER, TERMINATED, TERMINATED },
+                { CLIENT, TERMINATED, TERMINATED, TERMINATED, RETURN_TO_ORIGIN, TERMINATED },
+                { CLERK, CLIENT, TERMINATED, TERMINATED, RETURN_TO_ORIGIN, TERMINATED },
+                { MANAGER, TERMINATED, CLERK, TERMINATED, LOGIN, TERMINATED }
         };
         currentState = states[currentStateIndex];
     }
@@ -118,9 +118,9 @@ public class WarehouseContext {
         currentState = states[currentStateIndex];
     }
 
-    public int loginAsClient(String id, String password) {
-        if (!security.verifyLogin(Role.CLIENT, id, password)) {
-            System.out.println("No such client, or invalid credentials");
+    public int loginAsClient(String id) {
+        if (id == null || warehouse.getClientByID(id) == null) {
+            System.out.println("No such client");
             return STAY;
         }
         clientID = id;
@@ -143,6 +143,7 @@ public class WarehouseContext {
         }
         return GO_CLERK;
     }
+
     public int becomeClerk(String managerPassword) {
         if (!security.verifyManagerPassword(managerPassword)) {
             System.out.println("Invalid manager credentials");
