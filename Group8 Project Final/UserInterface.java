@@ -1,7 +1,6 @@
-import java.util.*;
 import java.io.*;
+import java.util.*;
 
-/** Console interface for Group8 Project Final, in the LibraryFinal style. */
 public class UserInterface {
   private static UserInterface userInterface;
   private BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
